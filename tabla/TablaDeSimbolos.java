@@ -1,26 +1,39 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TablaDeSimbolos {
-    private Map<String, Nodo> tabla;
+     private Map<String, Nodo> nodos;
+    private List<Arista> aristas;
 
     public TablaDeSimbolos() {
-        tabla = new HashMap<>();
+        nodos = new HashMap<>();
+        aristas = new ArrayList<>();
     }
 
     public void agregarNodo(String nombre, Nodo nodo) {
-        tabla.put(nombre, nodo);
+        nodos.put(nombre, nodo);
     }
 
     public Nodo obtenerNodo(String nombre) {
-        return tabla.get(nombre);
+        return nodos.get(nombre);
     }
 
     public boolean existeNodo(String nombre) {
-        return tabla.containsKey(nombre);
+        return nodos.containsKey(nombre);
     }
 
-    public Map<String, Nodo> obtenerTabla() {
-        return tabla;
+    public void agregarArista(Nodo origen, Nodo destino) {
+        Arista arista = new Arista(origen, destino);
+        aristas.add(arista);
+    }
+
+    public List<Arista> obtenerAristas() {
+        return aristas;
+    }
+
+    public Map<String, Nodo> obtenerNodos() {
+        return nodos;
     }
 }
