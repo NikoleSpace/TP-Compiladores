@@ -1,0 +1,55 @@
+lexer grammar DOTLexer;
+
+GRAPH : [Gg] [Rr] [Aa] [Pp] [Hh];
+DIGRAPH : [Dd] [Ii] [Gg] [Rr] [Aa] [Pp] [Hh];
+NODE : [Nn] [Oo] [Dd] [Ee];
+EDGE : [Ee] [Dd] [Gg] [Ee];
+SUBGRAPH : [Ss] [Uu] [Bb] [Gg] [Rr] [Aa] [Pp] [Hh];
+
+STRICT : [Ss] [Tt] [Rr] [Ii] [Cc] [Tt];
+SEMI : ';';
+LBRACE : '{';
+RBRACE : '}';
+EQUAL : '=';
+COMMA : ',';
+LCORCH: '[';
+RCORCH: ']';
+
+CompassN     : 'n';
+CompassNE    : 'ne';
+CompassE     : 'e';
+CompassSE    : 'se';
+CompassS     : 's';
+CompassSW    : 'sw';
+CompassW     : 'w';
+CompassNW    : 'nw';
+Center       : 'c';
+Underscore   : '_';
+
+
+NUMBER : '-'? ( '.' DIGIT+ | DIGIT+ ( '.' DIGIT* )? );
+
+fragment DIGIT
+   : [0-9]
+   ;
+
+
+STRING : '"' ( '\\"' | ~[\\"] )* '"';
+
+ID : [a-zA-Z_][a-zA-Z_0-9]*;
+
+HTML_STRING : '<' ( TAG | ~[<>] )* '>';
+
+fragment TAG
+   : '<' .*? '>'
+   ;
+
+WS : [ \t\r\n]+ -> skip;
+COMMENT : '/' .? '*/' -> skip;
+LINE_COMMENT : '//' .*? ('\r'? '\n' | EOF) -> skip;
+PREPROC : '#' ~[\r\n]* -> skip;
+COLON : ':';
+ARROW : '->';
+DASH : '--';
+ERROR : . -> more;
+
